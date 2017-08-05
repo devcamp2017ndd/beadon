@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * gap: file:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/onsenui/js/onsenui.min.js"></script>
+    <script type="text/javascript" src="lib/onsenui/js/angular-onsenui.min.js"></script>
+    <title>beadon</title>
+</head>
+
+<body>
+    <ons-sliding-menu var="menu" menu-page="menu.html" side="right" type="overlay" max-slide-distance="250px" swipeable="false">
+      <ons-navigator var="navi" page="pages/login.html" ></ons-navigator>
+    </ons-sliding-menu>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+
+        var bstrap = ons.bootstrap();
+        bstrap.controller('menu',function($scope){
+        
+            $scope.onClickMenuMemory = function(){
+            navi.pushPage('pages/memory/memory.html', {animation:"fade"});
+            menu.closeMenu();
+            }
+        
+            $scope.onClickMenuAccsess = function(){
+            navi.pushPage('pages/access/access.html', {animation:"fade"});
+            menu.closeMenu();
+            }
+        
+            $scope.onClickMenuLog = function(){
+            navi.pushPage('pages/log/log.html', {animation:"fade"});
+            menu.closeMenu();
+            }
+        
+            $scope.onClickMenuInfo = function(){
+            navi.pushPage('pages/info/info.html', {animation:"fade"});
+            menu.closeMenu();
+            }
+        
+            $scope.onClickMenuSetting = function(){
+            navi.pushPage('pages/setting/setting.html', {animation:"fade"});
+            menu.closeMenu();
+            }
+        
+            $scope.onClickMenuLogin = function(){
+            navi.pushPage('pages/login.html', {animation:"slide"});
+            menu.closeMenu();
+            }
+        });
+    </script>
+</body>
+
+</html>

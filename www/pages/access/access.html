@@ -1,0 +1,21 @@
+<ons-page>
+
+    <ons-toolbar>
+      <div class="right">
+        <ons-toolbar-button onclick="menu.toggleMenu()">
+          <ons-icon icon="ion-navicon"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">Access</div>
+    </ons-toolbar>
+    
+    <p style="text-align: center; color: #999; padding-top: 100px;">
+      利用できるビーコンの情報
+    </p>
+    
+    <ons-tabbar>
+      <ons-tab page="pages/access/available.html" label="Available" icon="ion-unlocked"></ons-tab>
+      <ons-tab page="qr.html" label="Read QR" icon="fa-qrcode"></ons-tab>
+    </ons-tabbar>
+    
+</ons-page>

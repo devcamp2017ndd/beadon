@@ -1,0 +1,23 @@
+<ons-page>
+
+  <ons-toolbar>
+    <div class="center">LogIn</div>
+    <div class="right"><ons-toolbar-button>Close</ons-toolbar-button></div>
+  </ons-toolbar>
+
+  <div class="login-form" style="text-align: center; width: 80%; margin: 60px auto 0;">
+    <p>
+      <ons-input id="email" modifier="material" type="email" placeholder="E-mail" float ng-model="login.email" style="width: 95%;"></ons-input>
+    </p>
+    <p>
+      <ons-input id="password" modifier="material" type="password" placeholder="Password" float ng-model="login.password" style="width: 95%;"></ons-input>
+    </p>
+    
+    <br>
+    
+    <ons-button modifier="large" class="login-button" ng-click="navi.pushPage('pages/memory/memory.html', {animation:'lift'}); ">Log In</ons-button>
+    <ons-button modifier="quiet" class="forgot-password" style="font-size: 14px;">Forgot password?</ons-button>
+    
+  </div>
+
+</ons-page>

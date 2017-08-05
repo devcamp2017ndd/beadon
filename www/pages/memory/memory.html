@@ -1,0 +1,41 @@
+<ons-page>
+
+  <ons-toolbar>  
+    <div class="left">
+      <ons-icon 
+        icon="fa-wifi"
+        size="16px"
+        style="color: #38474F; margin: 0px 0px 0px 10px;">
+      </ons-icon>
+    </div>
+    <div class="right">
+      <ons-toolbar-button ng-click="menu.toggleMenu()">
+        <ons-icon icon="ion-navicon"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+    <div class="center">Memory</div>
+  </ons-toolbar>
+    
+  <div class="center" style="text-align: center; margin: 100px 0px 0px 0px;">
+    <ons-icon icon="fa-wifi"
+        size="100px"
+        style="color: #10CFBD;">
+    </ons-icon><br>
+          
+    <ons-icon icon="ion-social-snapchat-outline"
+        size="30px"
+        spin=true
+        style="color: #4BAFF4;">
+    </ons-icon><br>
+        beacon 検索中...      
+  </div>
+    
+  <ons-tabbar>
+    <ons-tab page="pages/memory/home.html" label="Home" icon="fa-home"></ons-tab>
+    <ons-tab page="pages/memory/timeline.html" label="TimeLine" icon="fa-camera-retro"></ons-tab>
+    <ons-tab page="pages/memory/search.html" label="Search" icon="fa-search"></ons-tab>
+    <ons-tab page="pages/memory/upload.html" label="Upload" icon="fa-upload"></ons-tab>
+    <ons-tab page="pages/memory/private.html" label="Private" icon="ion-key"></ons-tab>
+  </ons-tabbar>
+    
+</ons-page>
