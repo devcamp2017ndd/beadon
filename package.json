@@ -4,6 +4,7 @@
   "description": "OSS開発合宿2017のアプリケーション",
   "main": "src/js/app.js",
   "scripts": {
+    "preinstall": "mkdir platforms plugins",
     "postinstall": "cpx \"node_modules/onsenui/**/*\" www/lib/onsenui && cpx \"node_modules/angular/**/*\" www/lib/angular"
   },
   "repository": {
