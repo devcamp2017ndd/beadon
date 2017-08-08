@@ -8,6 +8,7 @@ phonegapや、ios-simは`npm i -g phonegap ios-sim`でインストールして�
 ```bash
 $ git clone https://github.com/devcamp2017ndd/beadon.git
 $ cd beadon
+$ npm i
 $ phonegap platform add ios
 # ios-simが古くてエラーが出てしまうので、削除する
 $ rm -fr platforms/ios/cordova/node_modules/ios-sim
