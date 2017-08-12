@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="my-app">
 
 <head>
     <meta charset="utf-8" />
@@ -17,48 +17,17 @@
 </head>
 
 <body>
-    <ons-sliding-menu var="menu" menu-page="menu.html" side="right" type="overlay" max-slide-distance="250px" swipeable="false">
+   <ons-sliding-menu var="menu" menu-page="menu.html" side="right" type="overlay" max-slide-distance="250px" swipeable="false">
       <ons-navigator var="navi" page="pages/login.html" ></ons-navigator>
     </ons-sliding-menu>
+  
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-
-        var bstrap = ons.bootstrap();
-        bstrap.controller('menu',function($scope){
-        
-            $scope.onClickMenuMemory = function(){
-            navi.pushPage('pages/memory/memory.html', {animation:"fade"});
-            menu.closeMenu();
-            }
-        
-            $scope.onClickMenuAccsess = function(){
-            navi.pushPage('pages/access/access.html', {animation:"fade"});
-            menu.closeMenu();
-            }
-        
-            $scope.onClickMenuLog = function(){
-            navi.pushPage('pages/log/log.html', {animation:"fade"});
-            menu.closeMenu();
-            }
-        
-            $scope.onClickMenuInfo = function(){
-            navi.pushPage('pages/info/info.html', {animation:"fade"});
-            menu.closeMenu();
-            }
-        
-            $scope.onClickMenuSetting = function(){
-            navi.pushPage('pages/setting/setting.html', {animation:"fade"});
-            menu.closeMenu();
-            }
-        
-            $scope.onClickMenuLogin = function(){
-            navi.pushPage('pages/login.html', {animation:"slide"});
-            menu.closeMenu();
-            }
-        });
-    </script>
-</body>
-
+    <script type="text/javascript">   
+   　//app.initialize();
+      var bstrap = ons.bootstrap('my-app', ['onsen']);      
+   </script>
+   <script type="text/javascript" src="js/login.js"></script>
+   <script type="text/javascript" src="js/menu.js"></script>
+  </body>
 </html>
