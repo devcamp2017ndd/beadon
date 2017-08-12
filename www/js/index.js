@@ -7,30 +7,6 @@ ons.ready(function(){
     if (ons.platform.isIOS7above || ons.platform.isAndroid) {beaconSetup();}
 });
 
-
-var onSuccessGPS = function(position) {
-    alert('Latitude: '          + position.coords.latitude          + '\n' +
-          'Longitude: '         + position.coords.longitude         + '\n' +
-          'Altitude: '          + position.coords.altitude          + '\n' +
-          'Accuracy: '          + position.coords.accuracy          + '\n' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-          'Heading: '           + position.coords.heading           + '\n' +
-          'Speed: '             + position.coords.speed             + '\n' +
-          'Timestamp: '         + position.timestamp                + '\n');
-};
-
-// onError Callback receives a PositionError object
-//
-var onErrorGPS = function (error) {
-    alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
-}
-
-var checkPosition = function() {
-    navigator.geolocation.getCurrentPosition(onSuccessGPS, onErrorGPS);
-};
-
-
 var beaconSetup = function() {
     locationManager = cordova.plugins.locationManager;
     var delegate = new locationManager.Delegate();
@@ -59,15 +35,4 @@ var beaconSetup = function() {
 
     locationManager.setDelegate(delegate);
 
-    // required in iOS 8+
-    locationManager.requestWhenInUseAuthorization();
-    // or cordova.plugins.locationManager.requestAlwaysAuthorization()
-
-    locationManager.startMonitoringForRegion(beaconRegion)
-        .fail(function(e) { console.error(e); })
-        .done();
-
-    locationManager.startRangingBeaconsInRegion(beaconRegion)
-        .fail(function(e) { console.error(e); })
-        .done();
 };

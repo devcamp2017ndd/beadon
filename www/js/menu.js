@@ -1,6 +1,6 @@
 bstrap.controller('menu',function($scope){
 
-    $scope.onClickMenuMemorys = function(){
+    $scope.onClickMenuMemory = function(){
         navi.pushPage('pages/memorys/memory.html', {animation:"fade"});
         menu.closeMenu();
     }
@@ -27,6 +27,15 @@ bstrap.controller('menu',function($scope){
 
     $scope.onClickMenuLogin = function(){
         navi.pushPage('pages/login.html', {animation:"slide"});
+        if (locationManager) {
+            locationManager.stopRangingBeaconsInRegion(beaconRegion)
+                .fail(function(e) { console.error(e); })
+                .done();
+
+            locationManager.stopMonitoringForRegion(beaconRegion)
+                .fail(function(e) { console.error(e); })
+                .done();
+        }
         menu.closeMenu();
     }
 
