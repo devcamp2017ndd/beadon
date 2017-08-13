@@ -1,7 +1,7 @@
-bstrap.controller('menu',function($scope){
+bstrap.controller('MenuController',function($scope){
 
     $scope.onClickMenuMemory = function(){
-        navi.pushPage('pages/memorys/memory.html', {animation:"fade"});
+        navi.pushPage('pages/memory/memory.html', {animation:"fade"});
         menu.closeMenu();
     }
 
@@ -25,18 +25,17 @@ bstrap.controller('menu',function($scope){
         menu.closeMenu();
     }
 
-    $scope.onClickMenuLogin = function(){
-        navi.pushPage('pages/login.html', {animation:"slide"});
-        if (locationManager) {
-            locationManager.stopRangingBeaconsInRegion(beaconRegion)
-                .fail(function(e) { console.error(e); })
-                .done();
-
-            locationManager.stopMonitoringForRegion(beaconRegion)
-                .fail(function(e) { console.error(e); })
-                .done();
-        }
+    $scope.onClickMenuLogout = function(){
+        navi.resetToPage('pages/login.html', {animation:"slide"});
         menu.closeMenu();
+        if (app.locationManager) { return; }
+        app.locationManager.stopRangingBeaconsInRegion(app.beaconRegion)
+            .fail(function(e) { console.error(e); })
+            .done();
+
+        app.locationManager.stopMonitoringForRegion(app.beaconRegion)
+            .fail(function(e) { console.error(e); })
+            .done();
     }
 
 });

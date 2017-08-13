@@ -1,38 +1,41 @@
-var locationManager;
-var beaconRegion;
+var app = {
+    locationManager: null,
+    beaconRegion: null,
+    uuid: 'bec77a36-12c8-4871-aef9-31677f810d1e',
+    identifier: 'beacon_of_devcamp2017ndd',
+    major: 1000,
+    minor: 20
+};
 
 var bstrap = ons.bootstrap('my-app', ['onsen']);
-ons.ready(function(){
-    console.log('Received Event: deviceready');
-    if (ons.platform.isIOS7above || ons.platform.isAndroid) {beaconSetup();}
-});
 
-var beaconSetup = function() {
-    locationManager = cordova.plugins.locationManager;
-    var delegate = new locationManager.Delegate();
+// var beaconSetup = function(_scope) {
+//     try {
+//         app.locationManager = cordova.plugins.locationManager;
+//     } catch(e) {
+//         console.error(e);
+//         return false;
+//     }
 
-    delegate.didDetermineStateForRegion = function (pluginResult) {
-        console.log('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
+//     var delegate = new app.locationManager.Delegate();
 
-        locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
-            + JSON.stringify(pluginResult));
-    };
+//     var _time = Date.now();
+//     delegate.didRangeBeaconsInRegion = function (pluginResult) {
+//         // console.log('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
+//         console.log("hogehoge:" + JSON.stringify(pluginResult.beacons));
+//         if (Date.now() - _time > 5000) {
+//             document.getElementById("beacon").innerHTML = JSON.stringify(pluginResult.beacons);
+//             _time = Date.now();
+//         }
+//     };
 
-    delegate.didStartMonitoringForRegion = function (pluginResult) {
-        console.log('didStartMonitoringForRegion:' + JSON.stringify(pluginResult));
-    };
+//     app.beaconRegion = new app.locationManager.BeaconRegion(app.identifier, app.uuid);
 
-    delegate.didRangeBeaconsInRegion = function (pluginResult) {
-        console.log('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
-    };
+//     app.locationManager.setDelegate(delegate);
 
-    var uuid ='bec77a36-12c8-4871-aef9-31677f810d1e';
-    var identifier = 'beacon_of_devcamp2017ndd';
-    var major = 1000;
-    var minor = 20;
+//     app.locationManager.startRangingBeaconsInRegion(app.beaconRegion)
+//         .fail(function(e) { console.error(e); })
+//         .done();
 
-    beaconRegion = new locationManager.BeaconRegion(identifier, uuid);
-
-    locationManager.setDelegate(delegate);
-
-};
+//     return true;
+// };
