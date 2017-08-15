@@ -1,13 +1,18 @@
 bstrap.controller('LoginController',function($scope){
-        
-        ons.ready(function() {
-            ons.createDialog('pages/dialog/testDia.html').then(function(dialog) {
-                dialog.show();
-            });
-        });
-        
-        $scope.onClickLogin = function(){
-          navi.pushPage('pages/memorys/memorys.html', {animation:'lift'});
-        }
-        
-}); 
+    $scope.onClickLogin = function(){
+        navi.pushPage('pages/memory/memory.html', {animation:'lift'});
+        if (!locationManager) { return; }
+
+        locationManager.requestWhenInUseAuthorization();
+        // or cordova.plugins.locationManager.requestAlwaysAuthorization()
+    
+        locationManager.startMonitoringForRegion(beaconRegion)
+            .fail(function(e) { console.error(e); })
+            .done();
+    
+        locationManager.startRangingBeaconsInRegion(beaconRegion)
+            .fail(function(e) { console.error(e); })
+            .done();
+
+    }
+});
