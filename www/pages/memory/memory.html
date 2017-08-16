@@ -36,16 +36,16 @@
 
   <div ng-show="isActiveBLE() && detected()">
     <ons-list-header>INSTANCE</ons-list-header>
-    <ons-list class="timeline" modifier="inset">
-      <ons-list-item class="timeline-li" modifier="tappable" ng-repeat="beacon in beacons">
+    <ons-list beacon-list modifier="inset">
+      <ons-list-item modifier="tappable" ng-repeat="beacon in beacons" ng-click="fire();">
         <ons-row>
           <ons-col width="50px">
-            <ons-icon icon="fa-wifi" class="list-item__icon"></ons-icon>
+            <ons-icon icon="fa-wifi"></ons-icon>
           </ons-col>
           <ons-col>
-            <div class="timeline-message">
-              {{beacon.uuid}}
-            </div>
+            <span>
+              major: {{beacon.major}}/minor: {{beacon.minor}} 
+            </span>
           </ons-col>
         </ons-row>
       </ons-list-item>
