@@ -28,7 +28,7 @@ bstrap.controller('MenuController',function($scope){
     $scope.onClickMenuLogout = function(){
         navi.resetToPage('pages/login.html', {animation:"slide"});
         menu.closeMenu();
-        if (app.locationManager) { return; }
+        if (!app.locationManager) { return; }
         app.locationManager.stopRangingBeaconsInRegion(app.beaconRegion)
             .fail(function(e) { console.error(e); })
             .done();
