@@ -1,36 +1,57 @@
 bstrap.controller('MemoryController', function($scope, $interval){
+    var _beacons = app.demo ? [{
+            uuid: app.uuid,
+            major: 2000,
+            minor: 10
+        },
+        {
+            uuid: app.uuid,
+            major: 2000,
+            minor: 20
+        }] : [];
+    var timeoutId;
+
     $scope.beacons = [];
-    $scope._detected = false;
 
     $scope.isActiveBLE = function(){
-        return app.locationManager;
+        return app.demo ? true : app.locationManager;
     };
 
     $scope.detected = function() {
-        return $scope._detected;
-    }
+        return $scope.beacons.length > 0;
+    };
+
+    $scope.selectBeacon = function(index) {
+        app.beacon = $scope.beacons[index];
+        console.log(index);
+        // beaconをpostしてURLを取得する。
+        navi.pushPage('pages/memory/tabbar.html', {animation:'lift'});
+    };
 
     $scope.startInterval = function() {
-        if ( angular.isDefined(app.stop) ) { return; }
+        if ( angular.isDefined(timeoutId) ) { return; }
         console.log("startInterval");
         
-        app.stop = $interval(function() {
-            console.log("beacons:" + JSON.stringify($scope.beacons));
+        timeoutId = $interval(function() {
+            console.log("beacons:" + JSON.stringify(_beacons));
+            $scope.beacons = _beacons;
         }, 2000);
     };
 
     $scope.$on('$destroy', function() {
-        if (angular.isDefined(app.stop)) {
-            $interval.cancel(app.stop);
-            app.stop = undefined;
+        if (angular.isDefined(timeoutId)) {
+            $interval.cancel(timeoutId);
+            timeoutId = undefined;
         }
     });
 
-    ons.ready(function(){
+    $scope.$watch("_visibleTabber");
+
+    var setUp = function() {
         try {
             app.locationManager = cordova.plugins.locationManager;
             if (!app.locationManager) {
-                ons.notification.alert("Please Turn on Bluetooth");
+                console.error("Can not find Bluetooth device");
                 return;
             }
             var delegate = new app.locationManager.Delegate();
@@ -39,20 +60,22 @@ bstrap.controller('MemoryController', function($scope, $interval){
             return;
         }
         
-        var _time = Date.now();
         delegate.didRangeBeaconsInRegion = function (pluginResult) {
-            $scope._detected = pluginResult.beacons.length ? true : false;
-            $scope.beacons = pluginResult.beacons;
+            _beacons = pluginResult.beacons;
         };
-    
+        
         app.beaconRegion = new app.locationManager.BeaconRegion(app.identifier, app.uuid);
-    
+        
         app.locationManager.setDelegate(delegate);
-    
+        
         app.locationManager.startRangingBeaconsInRegion(app.beaconRegion)
             .fail(function(e) { console.error(e); })
             .done();
-        
+    };
+    
+    ons.ready(function(){
+        if (!app.demo) { setUp(); }
         $scope.startInterval();
     });
+
 });
