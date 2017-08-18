@@ -9,6 +9,8 @@ bstrap.controller('MemoryController', function($scope, $interval){
             major: 2000,
             minor: 20
         }] : [];
+    var timeoutId;
+
     $scope.beacons = [];
 
     $scope.isActiveBLE = function(){
@@ -17,30 +19,39 @@ bstrap.controller('MemoryController', function($scope, $interval){
 
     $scope.detected = function() {
         return $scope.beacons.length > 0;
-    }
+    };
+
+    $scope.selectBeacon = function(index) {
+        app.beacon = $scope.beacons[index];
+        console.log(index);
+        // beaconをpostしてURLを取得する。
+        navi.pushPage('pages/memory/tabbar.html', {animation:'lift'});
+    };
 
     $scope.startInterval = function() {
-        if ( angular.isDefined(app.stop) ) { return; }
+        if ( angular.isDefined(timeoutId) ) { return; }
         console.log("startInterval");
         
-        app.stop = $interval(function() {
-            console.log("beacons:" + JSON.stringify(_beacons) + Date.now());
+        timeoutId = $interval(function() {
+            console.log("beacons:" + JSON.stringify(_beacons));
             $scope.beacons = _beacons;
         }, 2000);
     };
 
     $scope.$on('$destroy', function() {
-        if (angular.isDefined(app.stop)) {
-            $interval.cancel(app.stop);
-            app.stop = undefined;
+        if (angular.isDefined(timeoutId)) {
+            $interval.cancel(timeoutId);
+            timeoutId = undefined;
         }
     });
+
+    $scope.$watch("_visibleTabber");
 
     var setUp = function() {
         try {
             app.locationManager = cordova.plugins.locationManager;
             if (!app.locationManager) {
-                ons.notification.alert("Please Turn on Bluetooth");
+                console.error("Can not find Bluetooth device");
                 return;
             }
             var delegate = new app.locationManager.Delegate();
@@ -49,7 +60,6 @@ bstrap.controller('MemoryController', function($scope, $interval){
             return;
         }
         
-        var _time = Date.now();
         delegate.didRangeBeaconsInRegion = function (pluginResult) {
             _beacons = pluginResult.beacons;
         };

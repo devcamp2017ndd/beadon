@@ -36,8 +36,8 @@
 
   <div ng-show="isActiveBLE() && detected()">
     <ons-list-header>INSTANCE</ons-list-header>
-    <ons-list beacon-list modifier="inset">
-      <ons-list-item modifier="tappable" ng-repeat="beacon in beacons" ng-click="fire();">
+    <ons-list modifier="inset">
+      <ons-list-item modifier="tappable" ng-repeat="beacon in beacons" ng-click="selectBeacon($index)">
         <ons-row>
           <ons-col width="50px">
             <ons-icon icon="fa-wifi"></ons-icon>
@@ -51,13 +51,5 @@
       </ons-list-item>
     </ons-list>
   </div> 
-
-  <ons-tabbar>
-    <ons-tab page="pages/memory/home.html" label="Home" icon="fa-home"></ons-tab>
-    <ons-tab page="pages/memory/timeline.html" label="TimeLine" icon="fa-camera-retro"></ons-tab>
-    <ons-tab page="pages/memory/post.html" label="Post" icon="fa-plus-square"></ons-tab>
-    <ons-tab page="pages/memory/search.html" label="Search" icon="fa-search"></ons-tab>
-    <ons-tab page="pages/memory/private.html" label="Private" icon="fa-key"></ons-tab>
-  </ons-tabbar>
     
 </ons-page>
