@@ -1,5 +1,12 @@
-<ons-page>
-  <ons-toolbar>  
+<ons-page ng-controller="PostController">
+  
+  <ons-toolbar>
+    <div class="left">
+      <ons-toolbar-button ng-click="onClickPostCancel()">
+        <ons-icon icon="fa-times-circle-o"></ons-icon>
+        Cancel
+      </ons-toolbar-button>
+    </div>
     <div class="right">
       <ons-toolbar-button ng-click="menu.toggleMenu()">
         <ons-icon icon="ion-navicon"></ons-icon>
@@ -7,9 +14,56 @@
     </div>
     <div class="center">Post</div>
   </ons-toolbar>
+  
+  <div class="spot-card">
+    <img src="img/tokyo.jpg" />
+    <p class="spot-card-name">東京タワー</p>
+    <p class="spot-card-desc">〒105-0011<br>東京都港区芝公園４丁目２−８</p>
+  </div>
+  
+  <div class="id-card">
+    <div class="to-image">
+      <img src="img/profile-image-01.jpg" >
+    </div>
+    <div class="to-name">
+      <div>Dave Graham</div>
+      <div style="font-size: 12px; opacity: 0.4;">@graham</div>
+    </div>
+  </div>
+  
+  <div class="post-text">
+    <textarea placeholder="いまどうしてる？" ng-model="postData.text" ng-blur="onBlurText()"></textarea>
+  </div>
 
-  <p style="text-align: center; color: #999; padding-top: 100px;">
-    インスタの投稿ページ敵なイメージ
-  </p>
+  <div class="navigation-bar">
+    <div class="navigation-bar__center">
+ 
+    <div class="button-bar" style="width:200px; margin:8px auto 0;">
+      <div class="button-bar__item">
+        <input type="radio" name="navi-segment-a" ng-click="onClickSnap()">
+        <div class="button-bar__button"><ons-icon icon="fa-camera"></ons-icon></div>
+      </div>
+      <div class="button-bar__item">
+        <input type="radio" name="navi-segment-a" ng-click="onClickLibrary()">
+        <div class="button-bar__button"><ons-icon icon="fa-picture-o"></ons-icon></div>
+      </div>
+      <div class="button-bar__item"  ng-click="onClickLocation()">
+        <input type="radio" name="navi-segment-a">
+        <div class="button-bar__button"><ons-icon icon="fa-map-marker"></ons-icon></div>
+      </div>
+    </div>
+      
+    </div>
+  </div>
+  
+  <div ng-class="postData.pictureClass">
+    <img class="spot-card-img" ng-src="{{postData.picture}}"/>
+  </div>
+  
+  <div style="padding: 10px">
+    <ons-button ng-click="onClickPost()" ng-disabled="postData.invalid" modifier="large">
+      Post
+    </ons-button>
+  </div>
   
 </ons-page>
