@@ -18,6 +18,7 @@
         "angular": "1.5.8",
         "angular-resource": "1.5.8",
         "angular-route": "1.5.8",
+        "browse": "^0.4.0",
         "com.unarin.cordova.beacon": "https://github.com/petermetz/cordova-plugin-ibeacon.git",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-battery-status": "~1.1.1",
