@@ -6,8 +6,8 @@ var app = {
     major: 1000,
     minor: 20,
     demo: true,
-    mstdn_url: 'mstdn.jp',
-    client_name: 'beadon'
+    api_gateway: 'https://79moqwl5cl.execute-api.ap-northeast-1.amazonaws.com/DevCamp2017NDD',
+    mstdn_url: null
 };
 
 var bstrap = ons.bootstrap('my-app', ["ngRoute", "ngResource", 'onsen']);
