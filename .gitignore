@@ -6,3 +6,5 @@ plugins/
 typings/
 angular/
 onsenui/
+angular-route/
+angular-resource/
