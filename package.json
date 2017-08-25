@@ -1,29 +1,79 @@
 {
-  "name": "beadon",
-  "version": "1.0.0",
-  "description": "OSS開発合宿2017のアプリケーション",
-  "main": "src/js/app.js",
-  "scripts": {
-    "preinstall": "mkdir platforms plugins",
-    "postinstall": "cpx \"node_modules/onsenui/**/*\" www/lib/onsenui && cpx \"node_modules/angular/**/*\" www/lib/angular"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/devcamp2017ndd/beadon.git"
-  },
-  "keywords": [],
-  "author": "Developer Camp 2017 Team NDD",
-  "license": "MIT",
-  "dependencies": {
-    "angular": "1.5.8",
-    "onsenui": "2.0.5",
-    "cpx": "1.5.0"
-  },
-  "devDependencies": {
-    "webpack": "^3.4.1"
-  },
-  "bugs": {
-    "url": "https://github.com/devcamp2017ndd/beadon/issues"
-  },
-  "homepage": "https://github.com/devcamp2017ndd/beadon#readme"
+    "name": "beadon",
+    "version": "1.0.0",
+    "description": "OSS開発合宿2017のアプリケーション",
+    "main": "src/js/app.js",
+    "scripts": {
+        "preinstall": "mkdir -p platforms plugins",
+        "postinstall": "cpx \"node_modules/onsenui/**/*\" www/lib/onsenui && cpx \"node_modules/angular/**/*\" www/lib/angular && cpx \"node_modules/angular-route/**/*\" www/lib/angular-route && cpx \"node_modules/angular-resource/**/*\" www/lib/angular-resource"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/devcamp2017ndd/beadon.git"
+    },
+    "keywords": [],
+    "author": "Developer Camp 2017 Team NDD",
+    "license": "MIT",
+    "dependencies": {
+        "angular": "1.5.8",
+        "angular-resource": "1.5.8",
+        "angular-route": "1.5.8",
+        "com.unarin.cordova.beacon": "https://github.com/petermetz/cordova-plugin-ibeacon.git",
+        "cordova-ios": "^4.4.0",
+        "cordova-plugin-battery-status": "~1.1.1",
+        "cordova-plugin-camera": "~2.1.1",
+        "cordova-plugin-console": "~1.0.2",
+        "cordova-plugin-contacts": "~2.0.1",
+        "cordova-plugin-device": "~1.1.1",
+        "cordova-plugin-device-motion": "~1.2.0",
+        "cordova-plugin-device-orientation": "~1.0.2",
+        "cordova-plugin-dialogs": "~1.2.0",
+        "cordova-plugin-file": "~4.1.1",
+        "cordova-plugin-file-transfer": "~1.5.0",
+        "cordova-plugin-geolocation": "~2.1.0",
+        "cordova-plugin-globalization": "~1.0.3",
+        "cordova-plugin-inappbrowser": "~1.3.0",
+        "cordova-plugin-media": "~2.2.0",
+        "cordova-plugin-media-capture": "~1.2.0",
+        "cordova-plugin-network-information": "~1.2.0",
+        "cordova-plugin-statusbar": "~2.1.2",
+        "cordova-plugin-vibration": "~2.1.0",
+        "cordova-plugin-whitelist": "~1.2.1",
+        "cpx": "1.5.0",
+        "onsenui": "2.0.5"
+    },
+    "devDependencies": {
+        "webpack": "^3.4.1"
+    },
+    "bugs": {
+        "url": "https://github.com/devcamp2017ndd/beadon/issues"
+    },
+    "homepage": "https://github.com/devcamp2017ndd/beadon#readme",
+    "cordova": {
+        "plugins": {
+            "com.unarin.cordova.beacon": {},
+            "cordova-plugin-battery-status": {},
+            "cordova-plugin-camera": {},
+            "cordova-plugin-console": {},
+            "cordova-plugin-contacts": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-device-motion": {},
+            "cordova-plugin-device-orientation": {},
+            "cordova-plugin-dialogs": {},
+            "cordova-plugin-file": {},
+            "cordova-plugin-file-transfer": {},
+            "cordova-plugin-geolocation": {},
+            "cordova-plugin-globalization": {},
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-media": {},
+            "cordova-plugin-media-capture": {},
+            "cordova-plugin-network-information": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-vibration": {},
+            "cordova-plugin-whitelist": {}
+        },
+        "platforms": [
+            "ios"
+        ]
+    }
 }
