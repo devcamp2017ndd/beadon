@@ -5,7 +5,9 @@ var app = {
     identifier: 'beacon_of_devcamp2017ndd',
     major: 1000,
     minor: 20,
-    demo: true
+    demo: true,
+    mstdn_url: 'mstdn.jp',
+    client_name: 'beadon'
 };
 
-var bstrap = ons.bootstrap('my-app', ['onsen']);
+var bstrap = ons.bootstrap('my-app', ["ngRoute", "ngResource", 'onsen']);

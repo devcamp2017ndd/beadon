@@ -4,8 +4,8 @@
     "description": "OSS開発合宿2017のアプリケーション",
     "main": "src/js/app.js",
     "scripts": {
-        "preinstall": "mkdir platforms plugins",
-        "postinstall": "cpx \"node_modules/onsenui/**/*\" www/lib/onsenui && cpx \"node_modules/angular/**/*\" www/lib/angular"
+        "preinstall": "mkdir -p platforms plugins",
+        "postinstall": "cpx \"node_modules/onsenui/**/*\" www/lib/onsenui && cpx \"node_modules/angular/**/*\" www/lib/angular && cpx \"node_modules/angular-route/**/*\" www/lib/angular-route && cpx \"node_modules/angular-resource/**/*\" www/lib/angular-resource"
     },
     "repository": {
         "type": "git",
@@ -16,10 +16,10 @@
     "license": "MIT",
     "dependencies": {
         "angular": "1.5.8",
-        "cordova-ios": "^4.4.0",
-        "onsenui": "2.0.5",
-        "cpx": "1.5.0",
+        "angular-resource": "1.5.8",
+        "angular-route": "1.5.8",
         "com.unarin.cordova.beacon": "https://github.com/petermetz/cordova-plugin-ibeacon.git",
+        "cordova-ios": "^4.4.0",
         "cordova-plugin-battery-status": "~1.1.1",
         "cordova-plugin-camera": "~2.1.1",
         "cordova-plugin-console": "~1.0.2",
@@ -38,7 +38,9 @@
         "cordova-plugin-network-information": "~1.2.0",
         "cordova-plugin-statusbar": "~2.1.2",
         "cordova-plugin-vibration": "~2.1.0",
-        "cordova-plugin-whitelist": "~1.2.1"
+        "cordova-plugin-whitelist": "~1.2.1",
+        "cpx": "1.5.0",
+        "onsenui": "2.0.5"
     },
     "devDependencies": {
         "webpack": "^3.4.1"
