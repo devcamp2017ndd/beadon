@@ -1,13 +1,13 @@
 bstrap.controller('MemoryController', function($scope, $interval, BeaconSearchService){
     var _beacons = app.demo ? [{
             uuid: app.uuid,
-            major: 100,
+            major: 1000,
             minor: 10,
             beadonName: 'hoge'
         },
         {
             uuid: app.uuid,
-            major: 100,
+            major: 1000,
             minor: 20,
             beadonName: 'piyo'
         }] : [];
@@ -68,6 +68,9 @@ bstrap.controller('MemoryController', function($scope, $interval, BeaconSearchSe
         }
         
         delegate.didRangeBeaconsInRegion = function (pluginResult) {
+            angular.forEach(pluginResult.beacons, function(beacon) {
+                beacon.uuid = beacon.uuid.toLowerCase();
+            });
             _beacons = pluginResult.beacons;
         };
         
@@ -108,7 +111,7 @@ bstrap.factory('BeaconSearchService', function(AuthService, $q, $http){
                 // console.log(response.data);
                 var beacons = [];
                 angular.forEach(response.data.beacons, function(beacon){
-                    console.log(beacon)
+                    // console.log(beacon)
                     if (beacon.beadonURL) {
                         beacons.push(beacon);
                     }
