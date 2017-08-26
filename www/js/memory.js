@@ -1,13 +1,15 @@
-bstrap.controller('MemoryController', function($scope, $interval){
+bstrap.controller('MemoryController', function($scope, $interval, BeaconSearchService){
     var _beacons = app.demo ? [{
             uuid: app.uuid,
-            major: 2000,
-            minor: 10
+            major: 100,
+            minor: 10,
+            beadonName: 'hoge'
         },
         {
             uuid: app.uuid,
-            major: 2000,
-            minor: 20
+            major: 100,
+            minor: 20,
+            beadonName: 'piyo'
         }] : [];
     var timeoutId;
 
@@ -28,14 +30,19 @@ bstrap.controller('MemoryController', function($scope, $interval){
         navi.pushPage('pages/memory/tabbar.html', {animation:'lift'});
     };
 
+    var successCallback = function(beacons) {
+        $scope.beacons = beacons;
+    };
     $scope.startInterval = function() {
         if ( angular.isDefined(timeoutId) ) { return; }
         console.log("startInterval");
         
         timeoutId = $interval(function() {
-            console.log("beacons:" + JSON.stringify(_beacons));
-            $scope.beacons = _beacons;
-        }, 2000);
+            // console.log("beacons:" + JSON.stringify(_beacons));
+            // $scope.beacons = _beacons;
+            BeaconSearchService.find($scope, _beacons)
+            .then(successCallback);
+        }, 5000);
     };
 
     $scope.$on('$destroy', function() {
@@ -78,4 +85,42 @@ bstrap.controller('MemoryController', function($scope, $interval){
         $scope.startInterval();
     });
 
+});
+
+bstrap.factory('BeaconSearchService', function(AuthService, $q, $http){
+    return {
+        find: function($scope, beacons){
+            var _user = AuthService.getUser();
+            var req = {
+                method: 'POST',
+                url: app.api_gateway + '/getbeadon-json',
+                data: {
+                    id: _user.id, 
+                    'auth-key': _user.authkey, 
+                    beacons: beacons
+                }
+            };
+            var deferred = $q.defer();
+
+            $http(req)
+            .then(function (response) {
+                console.log("status:" + response.status);
+                // console.log(response.data);
+                var beacons = [];
+                angular.forEach(response.data.beacons, function(beacon){
+                    console.log(beacon)
+                    if (beacon.beadonURL) {
+                        beacons.push(beacon);
+                    }
+                });
+                deferred.resolve(beacons);
+            })
+            .catch(function(response) {
+                console.log("status:" + response.status);
+                console.error('Error occurred:', response.status, response.data);
+                deffered.reject();
+            });
+            return deferred.promise;
+        }
+    };
 });
