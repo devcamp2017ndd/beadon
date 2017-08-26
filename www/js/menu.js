@@ -1,4 +1,4 @@
-bstrap.controller('MenuController',function($scope){
+bstrap.controller('MenuController',function($scope, AuthService){
 
     $scope.onClickMenuMemory = function(){
         navi.bringPageTop('pages/memory/memory.html', {animation:"fade"});
@@ -25,7 +25,7 @@ bstrap.controller('MenuController',function($scope){
         menu.closeMenu();
     }
 
-    $scope.onClickMenuLogout = function(AuthService){
+    $scope.onClickMenuLogout = function(){
         AuthService.logout();
         navi.resetToPage('pages/login.html', {animation:"slide"});
         menu.closeMenu();
