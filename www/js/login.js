@@ -1,12 +1,16 @@
 bstrap.controller('LoginController',function($scope, AuthService){
+    var successCallback = function() {
+        navi.pushPage('pages/memory/memory.html', {animation:'lift'});
+    };
+    var errorCallback = function(msg) {
+        $scope.password = "";
+        $scope.alert = {msg: msg};
+    };
     $scope.onClickLogin = function(){
         console.log("login.js: onClickLogin");
-        AuthService.login($scope, $scope.id, $scope.password);
+        AuthService.login($scope, $scope.id, $scope.password)
+        .then(successCallback, errorCallback);
     };
-
-    $scope.checkInput = function() {
-        return ($scope.id && $scope.password);
-    }
 });
 
 bstrap.config(function($routeProvider, $httpProvider){
@@ -38,19 +42,16 @@ bstrap.factory('AuthService', function($q, $http){
                         authkey: response.data["auth-key"],
                         id: username
                     };
-                    $scope.navi.pushPage('pages/memory/memory.html', {animation:'lift'});
+                    deferred.resolve();
                 }
                 else {
-                    $scope.password = "";
-                    $scope.alert = {msg: "Login failed."};
+                    deferred.reject("Login failed.");
                 }
             })
             .catch(function(response) {
                 console.log("status:" + response.status);
                 console.error('Error occurred:', response.status, response.data);
-            })
-            .finally(function(){
-                deffered.resolve();
+                deferred.reject('Error occurred:', response.status, response.data);
             });
             return deferred.promise;
         },
