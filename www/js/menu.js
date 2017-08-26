@@ -25,7 +25,8 @@ bstrap.controller('MenuController',function($scope){
         menu.closeMenu();
     }
 
-    $scope.onClickMenuLogout = function(){
+    $scope.onClickMenuLogout = function(AuthService){
+        AuthService.logout();
         navi.resetToPage('pages/login.html', {animation:"slide"});
         menu.closeMenu();
         if (!app.locationManager) { return; }
