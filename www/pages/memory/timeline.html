@@ -5,30 +5,77 @@
         <ons-icon icon="ion-navicon"></ons-icon>
       </ons-toolbar-button>
     </div>
-    <div class="center">major:{{beacon.major}} / minor:{{beacon.minor}}</div>
+    <div class="center">{{beacon.beadonName}}</div>
   </ons-toolbar>
 
   <ons-list class="timeline" modifier="inset">
-    <ons-list-item class="timeline-li" modifier="tappable" ng-repeat="i in [1,2,3,4,5,6,7,8,9]">
+    <ons-list-item class="timeline-li" modifier="tappable" ng-repeat="toot in toots">
       <ons-row>
         <ons-col width="50px">
-          <img ng-src="img/profile-image-0{{i}}.jpg" class="timeline-image">
+          <img ng-src="{{toot.account.avatar_static}}" class="timeline-image">
         </ons-col>
-
+        
         <ons-col>
-          <div class="timeline-date">3m</div>
+          <div class="timeline-date">{{toot.created_at}}</div>
           <div class="timeline-from">
-            <span class="timeline-name">Dave Graham</span>
-            <span class="timeline-id">@daveg</span>
+            <span class="timeline-name">{{toot.account.display_name || toot.account.username}}</span>
+            <span class="timeline-id">@{{toot.account.username}}</span>
           </div>
-
+          
           <div class="timeline-message">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            <span ng-bind-html="toot.content"></span>
           </div>
         </ons-col>
       </ons-row>
     </ons-list-item>
   </ons-list>
-
-
+  
+  
 </ons-page>
+    <!--
+        {
+            "id": 22,
+            "created_at": "2017-08-26T00:14:32.089Z",
+            "in_reply_to_id": null,
+            "in_reply_to_account_id": null,
+            "sensitive": false,
+            "spoiler_text": "",
+            "visibility": "public",
+            "language": "ja",
+            "application": null,
+            "account": {
+                "id": 5,
+                "username": "m_tobali",
+                "acct": "m_tobali",
+                "display_name": "",
+                "locked": false,
+                "created_at": "2017-08-12T03:58:50.510Z",
+                "followers_count": 0,
+                "following_count": 0,
+                "statuses_count": 7,
+                "note": "<p>年齢不詳です。・・・</p>",
+                "url": "http://devcampndd.com/@m_tobali",
+                "avatar": "https://devcampndd.com/system/accounts/avatars/000/000/005/original/ebedf350094c9867.jpg?1502520403",
+                "avatar_static": "https://devcampndd.com/system/accounts/avatars/000/000/005/original/ebedf350094c9867.jpg?1502520403",
+                "header": "https://devcampndd.com/headers/original/missing.png",
+                "header_static": "https://devcampndd.com/headers/original/missing.png"
+            },
+            "media_attachments": [],
+            "mentions": [],
+            "tags": [
+                {
+                    "name": "タグ",
+                    "url": "https://devcampndd.com/tags/%E3%82%BF%E3%82%B0"
+                }
+            ],
+            "uri": "tag:devcampndd.com,2017-08-26:objectId=22:objectType=Status",
+            "content": "<p>はっしゅたぐ<br /><a href=\"http://devcampndd.com/tags/%E3%82%BF%E3%82%B0\" class=\"mention hashtag\" rel=\"tag\">#<span>タグ</span></a></p>",
+            "url": "http://devcampndd.com/@m_tobali/22",
+            "reblogs_count": 0,
+            "favourites_count": 0,
+            "reblog": null,
+            "favourited": null,
+            "reblogged": null,
+            "muted": null
+        },
+    -->
