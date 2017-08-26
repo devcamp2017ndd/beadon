@@ -37,7 +37,6 @@ bstrap.controller('TimelineController', function($scope, $interval, BeaconTimeli
     });
 
     ons.ready(function(){
-        if (!app.demo) { setUp(); }
         $scope.startInterval();
     });
 });
@@ -46,11 +45,9 @@ bstrap.factory('BeaconTimelineService', function($q, $http){
     var returnReq = function(beacon, toot_id) {
         var req = {
             method: 'GET',
-            // url: beacon.beadonURL + '/api/v1/timelines/public',
-            url: 'https://devcampndd.com//api/v1/timelines/public?limit=3',
+            url: beacon.beadonURL + '/api/v1/timelines/public?limit=10',
             headers: {
-                // Authorization: 'Bearer ' + beacon.accessToken
-                Authorization: 'Bearer 46e7eae67ebf42fcec15105758b39f671b00e1a31bcc50b8f174fb4226a0edae'
+                Authorization: 'Bearer ' + beacon.accessToken
             }
         };
         if (toot_id) {
