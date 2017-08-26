@@ -10,4 +10,4 @@ var app = {
     mstdn_url: null
 };
 
-var bstrap = ons.bootstrap('my-app', ["ngRoute", "ngResource", 'onsen']);
+var bstrap = ons.bootstrap('my-app', ["ngRoute", "ngResource", "ngSanitize", 'onsen']);

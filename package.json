@@ -5,7 +5,7 @@
     "main": "src/js/app.js",
     "scripts": {
         "preinstall": "mkdir -p platforms plugins",
-        "postinstall": "cpx \"node_modules/onsenui/**/*\" www/lib/onsenui && cpx \"node_modules/angular/**/*\" www/lib/angular && cpx \"node_modules/angular-route/**/*\" www/lib/angular-route && cpx \"node_modules/angular-resource/**/*\" www/lib/angular-resource"
+        "postinstall": "cpx \"node_modules/onsenui/**/*\" www/lib/onsenui && cpx \"node_modules/angular/**/*\" www/lib/angular && cpx \"node_modules/angular-route/**/*\" www/lib/angular-route && cpx \"node_modules/angular-resource/**/*\" www/lib/angular-resource && cpx \"node_modules/angular-sanitize/**/*\" www/lib/angular-sanitize"
     },
     "repository": {
         "type": "git",
@@ -18,6 +18,7 @@
         "angular": "1.5.8",
         "angular-resource": "1.5.8",
         "angular-route": "1.5.8",
+        "angular-sanitize": "1.5.8",
         "browse": "^0.4.0",
         "com.unarin.cordova.beacon": "https://github.com/petermetz/cordova-plugin-ibeacon.git",
         "cordova-ios": "^4.4.0",
