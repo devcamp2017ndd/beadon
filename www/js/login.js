@@ -1,9 +1,11 @@
 bstrap.controller('LoginController',function($scope, AuthService){
     var successCallback = function() {
+        $scope.disabled = true;
         navi.pushPage('pages/memory/memory.html', {animation:'lift'});
     };
     var errorCallback = function(msg) {
-        $scope.password = "";
+        // $scope.password = "";
+        $scope.disabled = false;
         $scope.alert = {msg: msg};
     };
     $scope.onClickLogin = function(){

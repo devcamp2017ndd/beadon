@@ -6,7 +6,7 @@
 
   <div class="login-form" style="text-align: center; width: 80%; margin: 60px auto 0;">
     <p>
-      <ons-input id="id" modifier="material" placeholder="ID" float ng-model="id" style="width: 95%;"></ons-input>
+      <ons-input id="id" modifier="material" type="text" placeholder="ID" float ng-model="id" style="width: 95%;"></ons-input>
     </p>
     <p>
       <ons-input id="password" modifier="material" type="password" placeholder="Password" float ng-model="password" style="width: 95%;"></ons-input>
@@ -14,7 +14,7 @@
 
     <br>
 
-    <ons-button modifier="large" class="login-button" ng-click="onClickLogin();" ng-disabled="!(id && password)">Log In</ons-button>
+    <ons-button modifier="large" class="login-button" ng-click="onClickLogin();" ng-disabled="!(id && password) || disabled">Log In</ons-button>
     <!-- <ons-button modifier="quiet" class="forgot-password" style="font-size: 14px;">Forgot password?</ons-button> -->
     <span style="color: red;" ng-show="alert">{{alert.msg}}</span>
 
