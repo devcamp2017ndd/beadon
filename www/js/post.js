@@ -1,5 +1,5 @@
 
-bstrap.controller('PostController',function($scope){
+bstrap.controller('PostController', ['$scope', '$http', function ($scope, $http) {
 
     $scope.postData = {
         text : "",
@@ -53,10 +53,71 @@ bstrap.controller('PostController',function($scope){
            }
        });
     }
-                  
+                
+                                     
     $scope.onClickPost = function(){
     　　console.log("post.js: onClickPost");
-                  
+       
+      var access_token = "949e1df98a083fe3b9f8b78f9279cbd7805aa17883f80acaa5af7eb396ca679f";
+      
+      var fd = new FormData();
+      window.resolveLocalFileSystemURL(attachment.img, function(fileEntry) {
+          fileEntry.file(function(file) {
+              var reader = new FileReader();
+              reader.onloadend = function(e) {
+                var imgBlob = new Blob([ $scope.postData.picture ], { type: "image/jpeg" } );
+                fd.append('file', imgBlob);
+                console.log(fd);
+          };
+                         
+           reader.readAsArrayBuffer(file);
+                                                                                     
+         }, function(e){$scope.errorHandler(e)});
+      }, function(e){$scope.errorHandler(e)});
+                                     
+                                     
+      var reqp = {
+          method : 'POST',
+          url : 'https://devcampndd.com/api/v1/media',
+          headers: {
+              'Authorization': 'Bearer ' + access_token,
+              'Content-Type': 'image/jpeg'
+          },
+          data: { file : fd }
+       }
+       
+       var imgId = "";
+       $http(reqp).success(function(data, status, headers, config) {
+            
+            imgId = data.id;
+            console.log("Id" + data.id);
+            console.log("type" + data.type);
+            console.log("url" + data.url);
+       }).error(function(data, status, headers, config) {
+             console.log("失敗です。" + data);
+             console.log("失敗です。" + status);
+             console.log("失敗です。" + headers);
+             console.log("失敗です。" + config);
+       });
+
+       var req = {
+           method : 'POST',
+           url : 'https://devcampndd.com/api/v1/statuses',
+           headers: {
+              'Authorization': 'Bearer ' + access_token
+           },
+           data: { status: $scope.postData.text,
+                   media_ids: [imgId,'','','']
+            }
+        }
+                                     
+        $http(req).success(function(data, status, headers, config) {
+             console.log("通信成功データ"+　data);
+             //ons.notification.alert({message: data.data[0].name});
+             }).error(function(data, status, headers, config) {
+                console.log("失敗ステータス"+ status);
+        });
+                                     
         // TODO
         // $scope.postData のデータを送るイメージです。
          ons.notification.alert({message: 'POSTしました！'});
@@ -89,4 +150,4 @@ bstrap.controller('PostController',function($scope){
         console.log("Camera cleanup Fail:" + message);
     }
                   
-});
+}]);
